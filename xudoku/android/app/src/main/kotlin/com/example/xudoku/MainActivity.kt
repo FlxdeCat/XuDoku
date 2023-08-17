@@ -1,0 +1,6 @@
+package com.example.xudoku
+
+import io.flutter.embedding.android.FlutterActivity
+
+class MainActivity: FlutterActivity() {
+}
