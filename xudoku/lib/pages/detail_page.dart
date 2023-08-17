@@ -55,34 +55,24 @@ class _DetailPageState extends State<DetailPage> {
     return DefaultTabController(
       length: 2,
       child: Scaffold(
-          drawer: Drawer(
-            child: ListView(
-              children: [
-                DrawerHeader(
-                  child: Center(child: Image.asset("assets/logo.png")),
-                ),
-                ListTile(
-                  leading: const Icon(Icons.logout_outlined),
-                  title: const Text("Logout", style: TextStyle(fontSize: 18)),
-                  onTap: () {
-                    if (widget.themeChanger.themeMode == ThemeMode.dark) {
-                      widget.changeTheme();
-                    }
-                    Navigator.pushAndRemoveUntil(context,
-                        MaterialPageRoute(builder: (context) {
-                      return LoginPage(
-                          changeTheme: widget.changeTheme,
-                          themeChanger: widget.themeChanger,
-                          sudokuList: widget.sudokuList);
-                    }), (route) => false);
-                  },
-                ),
-              ],
-            ),
-          ),
           appBar: AppBar(
             title: Text("Welcome, ${widget.username}"),
             actions: [
+              IconButton(
+                onPressed: () {
+                  if(widget.themeChanger.themeMode == ThemeMode.dark) widget.changeTheme();
+                    Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) {
+                          return LoginPage(changeTheme: widget.changeTheme, themeChanger: widget.themeChanger, sudokuList: widget.sudokuList);
+                        }
+                      ),
+                      (route) => false
+                    );
+                },
+                icon: const Icon(Icons.logout_outlined)
+              ),
               PopupMenuButton(
                 itemBuilder: (context) {
                   return <PopupMenuEntry>[

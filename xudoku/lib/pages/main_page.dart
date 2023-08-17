@@ -32,17 +32,12 @@ class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: Drawer(
-        child: ListView(
-          children: [
-            DrawerHeader(
-              child: Center(child: Image.asset("assets/logo.png")),
-            ),
-            ListTile(
-              leading: const Icon(Icons.logout_outlined),
-              title: const Text("Logout", style: TextStyle(fontSize: 18)),
-              onTap: () {
-                if(widget.themeChanger.themeMode == ThemeMode.dark) widget.changeTheme();
+      appBar: AppBar(
+        title: Text("Welcome, ${widget.username}"),
+        actions: [
+          IconButton(
+            onPressed: () {
+              if(widget.themeChanger.themeMode == ThemeMode.dark) widget.changeTheme();
                 Navigator.pushAndRemoveUntil(
                   context,
                   MaterialPageRoute(
@@ -52,14 +47,9 @@ class _MainPageState extends State<MainPage> {
                   ),
                   (route) => false
                 );
-              },
-            ),
-          ],
-        ),
-      ),
-      appBar: AppBar(
-        title: Text("Welcome, ${widget.username}"),
-        actions: [
+            },
+            icon: const Icon(Icons.logout_outlined)
+          ),
           PopupMenuButton(
             itemBuilder: (context) {
               return <PopupMenuEntry>[
